@@ -1,0 +1,42 @@
+.app-header--logo-wrapper {
+  display: flex;
+  margin: 1em 0;
+}
+
+.app-header--logo {
+  display: block;
+  width: 20%;
+}
+
+.app-header--title-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-end;
+  position: relative;
+  height: 262px;
+}
+
+.app-header--title-image { 
+  height: 262px;
+  position: absolute;
+  top: 0;
+  width: 1111px;
+}
+
+h1.app-header--title {
+  background-color: #AF6200E6;
+  border-bottom: 1em solid #fBB216;
+  bottom: -1em;
+  color: #ffffff;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 3.5rem;
+  font-weight: 600;
+  line-height: 0.9em;
+  margin: 0;
+  padding: 0.6em 0.6em 0 0.6em;
+  position: absolute;
+  text-transform: uppercase;
+  width: 864px;
+  z-index: 1;
+}
