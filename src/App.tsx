@@ -1,11 +1,10 @@
-import React from 'react';
 import './App.css';
+import Header from './Header';
 
-function App() {
-  return (
-    <div className="App">
-    </div>
-  );
-}
+const App = () => (
+  <div className="app">
+    <Header>Allston Campus Directory</Header>
+  </div>
+);
 
 export default App;
