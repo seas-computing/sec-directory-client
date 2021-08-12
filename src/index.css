@@ -1,6 +1,9 @@
-body, html {
+body {
   margin: 0;
   background: #ffffff;
+  height: 1920px;
+  width: 1080px;
+  overflow: hidden;
 }
 
 body *,
