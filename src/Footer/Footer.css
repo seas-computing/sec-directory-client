@@ -1,0 +1,25 @@
+.app-footer {
+  display: flex;
+  flex-direction: column;
+  justify-items: end;
+  align-content: stretch;
+  width: 100%;
+}
+
+.app-footer--logo {
+  background-color: #a51c30;
+  border-left: 1080px solid #ed1b35;
+  border-right: 1080px solid #57c5d7;
+  box-shadow: 
+    -1080px -1em 0 0 #ed1b35,
+    1080px 1em 0 0 #57c5d7;
+  display: block;
+  margin-left: -1080px;
+  margin-bottom: 1em;
+  width: 250px;
+}
+
+.app-footer--copyright { 
+  font-size: 0.75em;
+}
+
