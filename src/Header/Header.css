@@ -1,5 +1,6 @@
 .app-header {
   overflow-x: clip;
+  margin-bottom: 4em;
 }
 
 .app-header--logo-wrapper {
