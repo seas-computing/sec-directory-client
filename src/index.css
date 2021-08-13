@@ -1,5 +1,12 @@
-body, html {
+body {
   margin: 0;
   background: #ffffff;
-  box-sizing: border-box;
+  height: 1920px;
+  width: 1080px;
+  overflow: hidden;
+}
+
+body *,
+html * {
+  font-family: Arial, Helvetica, sans-serif;
 }
