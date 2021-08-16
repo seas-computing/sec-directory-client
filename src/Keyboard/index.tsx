@@ -20,6 +20,21 @@ interface OnScreenKeyboardProps {
   triggerSearchHandler: () => void;
 }
 
+
+/**
+* Enum for handling the casing of the keyboard
+*/
+enum CASE {
+  /** lowercase layout */
+  DEFAULT,
+  /** next character uppercase, then back to lowercase */
+  SHIFTED,
+  /** uppercase layout */
+  LOCKED,
+  /** next character lowercase, then back to uppercase */
+  UNSHIFTED,
+}
+
 const OnScreenKeyboard = ({
   searchQuery,
   searchUpdateHandler,
@@ -36,6 +51,51 @@ const OnScreenKeyboard = ({
   const [coordinates, setCoordinates] = useState<[number, number]>([540, 960]);
 
 const keyboardModalRef = useRef<HTMLDivElement>(null);
+
+  const otherKeyHandler = (button: string) => {
+    setKeyboardCase((currentCase) => {
+      switch(currentCase) {
+        case CASE.DEFAULT: {
+          if (button === '{shift}') {
+            return CASE.SHIFTED;
+          }
+          if (button === '{lock}') {
+            return CASE.LOCKED;
+          }
+          return CASE.DEFAULT;
+        }
+        case CASE.SHIFTED: {
+          if (button === '{shift}') {
+            return CASE.DEFAULT;
+          }
+          if (button === '{lock}') {
+            return CASE.LOCKED;
+          }
+          return CASE.DEFAULT;
+        }
+        case CASE.UNSHIFTED: {
+          if (button === '{shift}') {
+            return CASE.LOCKED;
+          }
+          if (button === '{lock}') {
+            return CASE.DEFAULT;
+          }
+          return CASE.LOCKED;
+        }
+        case CASE.LOCKED: {
+          if (button === '{shift}') {
+            return CASE.UNSHIFTED;
+          }
+          if (button === '{lock}') {
+            return CASE.DEFAULT;
+          }
+          return CASE.LOCKED;
+        }
+        default:
+          return currentCase;
+      }
+    });
+  };
 
   useLayoutEffect(() => {
     const modal = keyboardModalRef.current;
@@ -81,7 +141,12 @@ const keyboardModalRef = useRef<HTMLDivElement>(null);
           <div className="keyboard--keyboard-container">
             <Keyboard
               onChange={searchUpdateHandler}
-              layoutName="shift"
+              onKeyPress={otherKeyHandler}
+              layoutName={
+                [CASE.LOCKED, CASE.SHIFTED].includes(keyboardCase)
+                  ? 'shift'
+                  : 'default'
+              }
               theme="hg-theme-default hg-layout-default keyboard--component"
               useButtonTag
             />
