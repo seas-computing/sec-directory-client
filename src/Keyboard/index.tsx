@@ -82,6 +82,8 @@ const keyboardModalRef = useRef<HTMLDivElement>(null);
             <Keyboard
               onChange={searchUpdateHandler}
               layoutName="shift"
+              theme="hg-theme-default hg-layout-default keyboard--component"
+              useButtonTag
             />
           </div>
           <div className="keyboard--buttons">
