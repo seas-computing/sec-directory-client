@@ -1,7 +1,7 @@
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import './Keyboard.css';
-import { useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import {DISPLAY_WIDTH, DISPLAY_HEIGHT } from '../const/display';
 
@@ -41,18 +41,79 @@ const OnScreenKeyboard = ({
   triggerSearchHandler,
 }: OnScreenKeyboardProps) => {
   /**
-   * Whether the keyboard should be shown on screen
+   * Whether the keyboard should be shown on screen.
    */
-  const [isVisible, setVisible] = useState(true);
+  const [isVisible, setVisible] = useState(false);
 
   /**
-   * The X,Y coordinates on the page at which the keyboard should be rendered
+   * Set a ref to the modal for updating placement, etc.
+   */
+  const keyboardModalRef = useRef<HTMLDivElement>(null);
+  const backdropRef = useRef<HTMLDivElement>(null);
+  /**
+   * The X,Y coordinates on the page at which the center point of the keyboard
+   * should be rendered
    */
   const [coordinates, setCoordinates] = useState<[number, number]>([540, 960]);
 
-const keyboardModalRef = useRef<HTMLDivElement>(null);
+  /**
+   * Handle setting the event listener to open the keyboard when clicking on
+   * the body, then close it when clicking outside the modal
+   */
+  useEffect(() => {
+    if (isVisible) {
+      const background = backdropRef.current;
+      const closeKeyboard = (evt: MouseEvent) => {
+        if (evt.target === background) {
+          searchUpdateHandler('')
+          setVisible(false);
+        };
+      }
+      if (background) {
+        background.addEventListener('click', closeKeyboard);
+      }
+      return(() => {
+        if (background) {
+           background.removeEventListener('click', closeKeyboard);
+        }
+      })
+    }
+    const openKeyboard = (evt: MouseEvent) => {
+      setVisible(true);
+      setCoordinates([evt.clientX, evt.clientY]);
+    };
+    document.body.addEventListener('click', openKeyboard);
+    return(() => {
+      document.body.removeEventListener('click', openKeyboard);
+    })
+  }, [
+    isVisible,
+    setVisible,
+    setCoordinates,
+    backdropRef,
+    searchUpdateHandler
+  ]);
+
+  /**
+  * Handles the Capitalization state of the keyboard
+  */
+  const [keyboardCase, setKeyboardCase] = useState<CASE>(CASE.DEFAULT);
+
+  /**
+   * Handles the logic for controlling the non-input keys, i.e shift, caps, and
+   * enter.
+   * The capitalization is not built into the keyboard library unfortunately,
+   * and I think that leaving out the upper/lower case functionality might be
+   * more confusing for users.
+   */
 
   const otherKeyHandler = (button: string) => {
+    // Trigger a search on enter
+    if (button === '{enter}') {
+      setVisible(false);
+      searchUpdateHandler('');
+      triggerSearchHandler();
+    }
     setKeyboardCase((currentCase) => {
       switch(currentCase) {
         case CASE.DEFAULT: {
@@ -97,13 +158,16 @@ const keyboardModalRef = useRef<HTMLDivElement>(null);
     });
   };
 
+  /**
+   * Calculate the position closest to the touch coordinates without rendering
+   * the keyboard offscreen.
+   */
   useLayoutEffect(() => {
     const modal = keyboardModalRef.current;
     const [xTap, yTap] = coordinates;
     if (isVisible && modal !== null) {
       const keyboardWidth = modal.clientWidth;
       const keyboardHeight = modal.clientHeight;
-      // Make sure that the tap position coordinates wouldn't render the keyboard outside the screen
       const leftEdge = xTap - keyboardWidth/2;
       const topEdge = yTap - keyboardHeight/2;
       const leftPosition = Math.min(
@@ -121,18 +185,18 @@ const keyboardModalRef = useRef<HTMLDivElement>(null);
 
   if (isVisible) {
     return createPortal((
-      <div className="keyboard--backdrop">
-        <div className="keyboard--modal" ref={keyboardModalRef}>
+      <div className="keyboard--backdrop" ref={backdropRef}>
+        <div role="dialog" className="keyboard--modal" ref={keyboardModalRef}>
           <div className="keyboard--search-container">
-            <label 
+            <label
               className="keyboard--search-input-label"
               htmlFor="search-query"
             >
               Search Query
             </label>
-            <input 
-              name="search-query" 
-              type="text" 
+            <input
+              name="search-query"
+              type="text"
               className="keyboard--search-input"
               placeholder="Search for a person or place"
               defaultValue={searchQuery}
@@ -154,15 +218,22 @@ const keyboardModalRef = useRef<HTMLDivElement>(null);
           <div className="keyboard--buttons">
             <button
               className="keyboard--cancel-button"
-              onClick={() => {setVisible(false)}}
+              onClick={() => {
+                searchUpdateHandler('');
+                setVisible(false);
+              }}
             >
               cancel
             </button>
             <button
               className="keyboard--search-button"
-              onClick={triggerSearchHandler}
+              onClick={() => {
+                triggerSearchHandler();
+                setVisible(false);
+                searchUpdateHandler('');
+              }}
             >
-              search 
+              search
             </button>
           </div>
         </div>
