@@ -135,7 +135,7 @@ const keyboardModalRef = useRef<HTMLDivElement>(null);
               type="text" 
               className="keyboard--search-input"
               placeholder="Search for a person or place"
-              value={searchQuery}
+              defaultValue={searchQuery}
             />
           </div>
           <div className="keyboard--keyboard-container">
