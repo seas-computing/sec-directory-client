@@ -1,0 +1,23 @@
+.app-welcome--banner {
+  background-color: var(--crimson);
+  padding: 1.5rem 6rem;
+}
+
+.app-welcome--banner-text {
+  color: #fff;
+  font-weight: 300;
+  font-size: 6rem;
+  text-align: center;
+}
+
+.app-welcome--message {
+  margin: 3rem 0;
+  padding: 3rem;
+}
+
+.app-welcome--message-text {
+  color: #000;
+  text-align: center;
+  font-size: 6rem;
+  line-height: 1.2;
+}

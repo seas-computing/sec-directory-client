@@ -1,4 +1,5 @@
 .app-footer {
+  margin-top: 2em;
   display: flex;
   flex-direction: column;
   justify-items: end;
@@ -20,6 +21,7 @@
 }
 
 .app-footer--copyright { 
-  font-size: 0.75em;
+  font-size: 0.8em;
+  margin: 1em;
 }
 
