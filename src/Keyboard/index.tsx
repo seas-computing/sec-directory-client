@@ -54,7 +54,9 @@ const OnScreenKeyboard = ({
    * The X,Y coordinates on the page at which the center point of the keyboard
    * should be rendered
    */
-  const [coordinates, setCoordinates] = useState<[number, number]>([540, 960]);
+  const [coordinates, setCoordinates] = useState<[number, number]>(
+    [DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2]
+  );
 
   /**
    * Handle setting the event listener to open the keyboard when clicking on
