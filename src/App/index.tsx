@@ -5,6 +5,7 @@ import Main from '../Main';
 import { useState } from 'react';
 import { VIEW } from './views';
 import Welcome from '../Welcome';
+import OnScreenKeyboard from '../Keyboard';
 import {
   appName,
   welcomeBannerText,
@@ -12,6 +13,8 @@ import {
 } from './text';
 
 const App = () => {
+  const [searchInput, setSearchInput] = useState('');
+
   const [currentView] = useState<VIEW>(VIEW.WELCOME);
   return (
     <div className="app">
@@ -22,6 +25,11 @@ const App = () => {
             {welcomeInstructions}
           </Welcome>
         )}
+        <OnScreenKeyboard
+          searchQuery={searchInput}
+          searchUpdateHandler={setSearchInput}
+          triggerSearchHandler={() => {console.log(`SEARCH: ${searchInput}`)}}
+        /> 
       </Main>
       <Footer />
     </div>
