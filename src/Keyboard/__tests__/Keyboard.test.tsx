@@ -7,9 +7,12 @@ const KeyboardTester = (
   { searchHandler }: { searchHandler: () => void }
 ) => {
   const [searchQuery, setSearchQuery] = useState('');
+  const [isVisible, setVisible] = useState(false);
   return (
     <div>
       <Keyboard 
+        isVisible={isVisible}
+        setVisible={setVisible}
         searchQuery={searchQuery}
         searchUpdateHandler={setSearchQuery}
         triggerSearchHandler={searchHandler}
