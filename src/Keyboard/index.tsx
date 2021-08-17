@@ -3,7 +3,7 @@ import 'react-simple-keyboard/build/css/index.css';
 import './Keyboard.css';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import {DISPLAY_WIDTH, DISPLAY_HEIGHT } from '../const/display';
+import { DISPLAY_WIDTH, DISPLAY_HEIGHT } from '../const/display';
 
 interface OnScreenKeyboardProps {
   /**
@@ -65,10 +65,10 @@ const OnScreenKeyboard = ({
       const background = backdropRef.current;
       const closeKeyboard = (evt: MouseEvent) => {
         if (evt.target === background) {
-          searchUpdateHandler('')
+          searchUpdateHandler('');
           setVisible(false);
-        };
-      }
+        }
+      };
       if (background) {
         background.addEventListener('click', closeKeyboard);
       }
@@ -76,7 +76,7 @@ const OnScreenKeyboard = ({
         if (background) {
            background.removeEventListener('click', closeKeyboard);
         }
-      })
+      });
     }
     const openKeyboard = (evt: MouseEvent) => {
       setVisible(true);
@@ -91,7 +91,7 @@ const OnScreenKeyboard = ({
     setVisible,
     setCoordinates,
     backdropRef,
-    searchUpdateHandler
+    searchUpdateHandler,
   ]);
 
   /**
@@ -177,7 +177,7 @@ const OnScreenKeyboard = ({
       const topPosition = Math.min(
         Math.max(0, topEdge),
         DISPLAY_HEIGHT - keyboardHeight
-      )
+      );
       modal.style.left = `${leftPosition}px`;
       modal.style.top = `${topPosition}px`;
     }
