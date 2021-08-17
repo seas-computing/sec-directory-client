@@ -3,7 +3,7 @@ import 'react-simple-keyboard/build/css/index.css';
 import './Keyboard.css';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { DISPLAY_WIDTH, DISPLAY_HEIGHT } from '../const/display';
+import { DISPLAY_WIDTH, DISPLAY_HEIGHT } from '../const';
 
 interface OnScreenKeyboardProps {
   /**
