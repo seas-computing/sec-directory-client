@@ -4,6 +4,7 @@ import Footer from '../Footer';
 import Main from '../Main';
 import { useEffect, useRef, useState } from 'react';
 import Welcome from '../Welcome';
+import SearchResults from '../Search';
 import OnScreenKeyboard from '../Keyboard';
 import {
   VIEW,
@@ -106,6 +107,11 @@ const App = () => {
           <Welcome bannerText={WELCOME_BANNER}>
             {WELCOME_INSTRUCTIONS}
           </Welcome>
+        )}
+        {currentView === VIEW.RESULTS && (
+          <SearchResults
+            searchQuery={searchInput}
+          />
         )}
         <OnScreenKeyboard
           backdropRef={keyboardBackgroundRef}
