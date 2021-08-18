@@ -4,4 +4,6 @@
  */
 export enum VIEW {
   WELCOME,
+  SEARCH,
+  RESULTS,
 };
