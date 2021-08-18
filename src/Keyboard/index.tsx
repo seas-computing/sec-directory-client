@@ -1,11 +1,19 @@
 import Keyboard from 'react-simple-keyboard';
 import 'react-simple-keyboard/build/css/index.css';
 import './Keyboard.css';
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { RefObject, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import { DISPLAY_WIDTH, DISPLAY_HEIGHT } from '../const';
 
 interface OnScreenKeyboardProps {
+  /**
+  * Capture a ref to the background behind the modal
+  */
+  backdropRef: RefObject<HTMLDivElement>;
+  /**
+   * The [X, Y] coordinates where the keyboard's center should be rendered
+   */
+  coordinates: [number, number]
   /**
    * The text that's currently being searched
    */
@@ -23,9 +31,9 @@ interface OnScreenKeyboardProps {
   */
   isVisible: boolean;
   /**
-  * Toggle the visibility of the keyboard
+  * hide the keyboard
   */
-  setVisible: (arg0: boolean) => void;
+  closeKeyboard: () => void;
 }
 
 
@@ -45,63 +53,19 @@ enum CASE {
 }
 
 const OnScreenKeyboard = ({
+  backdropRef,
+  coordinates,
   searchQuery,
   searchUpdateHandler,
   triggerSearchHandler,
   isVisible,
-  setVisible,
+  closeKeyboard,
 }: OnScreenKeyboardProps) => {
 
   /**
    * Set a ref to the modal for updating placement, etc.
    */
   const keyboardModalRef = useRef<HTMLDivElement>(null);
-  const backdropRef = useRef<HTMLDivElement>(null);
-  /**
-   * The X,Y coordinates on the page at which the center point of the keyboard
-   * should be rendered
-   */
-  const [coordinates, setCoordinates] = useState<[number, number]>(
-    [DISPLAY_WIDTH/2, DISPLAY_HEIGHT/2]
-  );
-
-  /**
-   * Handle setting the event listener to open the keyboard when clicking on
-   * the body, then close it when clicking outside the modal
-   */
-  useEffect(() => {
-    if (isVisible) {
-      const background = backdropRef.current;
-      const closeKeyboard = (evt: MouseEvent) => {
-        if (evt.target === background) {
-          searchUpdateHandler('');
-          setVisible(false);
-        }
-      };
-      if (background) {
-        background.addEventListener('click', closeKeyboard);
-      }
-      return(() => {
-        if (background) {
-           background.removeEventListener('click', closeKeyboard);
-        }
-      });
-    }
-    const openKeyboard = (evt: MouseEvent) => {
-      setVisible(true);
-      setCoordinates([evt.clientX, evt.clientY]);
-    };
-    document.body.addEventListener('click', openKeyboard);
-    return(() => {
-      document.body.removeEventListener('click', openKeyboard);
-    })
-  }, [
-    isVisible,
-    setVisible,
-    setCoordinates,
-    backdropRef,
-    searchUpdateHandler,
-  ]);
 
   /**
   * Handles the Capitalization state of the keyboard
@@ -119,8 +83,6 @@ const OnScreenKeyboard = ({
   const otherKeyHandler = (button: string) => {
     // Trigger a search on enter
     if (button === '{enter}') {
-      setVisible(false);
-      searchUpdateHandler('');
       triggerSearchHandler();
     }
     setKeyboardCase((currentCase) => {
@@ -227,20 +189,13 @@ const OnScreenKeyboard = ({
           <div className="keyboard--buttons">
             <button
               className="keyboard--cancel-button"
-              onClick={() => {
-                searchUpdateHandler('');
-                setVisible(false);
-              }}
+              onClick={closeKeyboard}
             >
               cancel
             </button>
             <button
               className="keyboard--search-button"
-              onClick={() => {
-                triggerSearchHandler();
-                setVisible(false);
-                searchUpdateHandler('');
-              }}
+              onClick={triggerSearchHandler}
             >
               search
             </button>
