@@ -1,34 +1,15 @@
 import { render, screen, fireEvent} from '@testing-library/react';
-import { useState } from 'react';
-import Keyboard from '..';
+import App from '../../App';
 
-
-const KeyboardTester = (
-  { searchHandler }: { searchHandler: () => void }
-) => {
-  const [searchQuery, setSearchQuery] = useState('');
-  const [isVisible, setVisible] = useState(false);
-  return (
-    <div>
-      <Keyboard 
-        isVisible={isVisible}
-        setVisible={setVisible}
-        searchQuery={searchQuery}
-        searchUpdateHandler={setSearchQuery}
-        triggerSearchHandler={searchHandler}
-      />
-      <p>Click outside</p>
-    </div>);
-}
+// Mocks out a very basic version of the algolia searchClient
+jest.mock('algoliasearch/lite', () => () => ({
+  search: () => {return []},
+}));
 
 describe('Keyboard', function () {
-  let searchHandler: () => void;
-  beforeEach(function () {
-    searchHandler = jest.fn();
- });
   describe('Opening/Closing the keyboard', function () {
     beforeEach(function () {
-      render(<KeyboardTester searchHandler={searchHandler} />);
+      render(<App />);
     });
     describe('On initial render', function () {
       it('Should not initially appear', function () {
@@ -78,7 +59,7 @@ describe('Keyboard', function () {
   });
   describe('Input display', function () {
     beforeEach(function () {
-      render(<KeyboardTester searchHandler={searchHandler} />);
+      render(<App />);
       fireEvent.click(document.body);
     });
     it('Should display the text entered in the keys', function () {
@@ -91,7 +72,7 @@ describe('Keyboard', function () {
   });
   describe('Upper- and lower-case handling', function () {
     beforeEach(function () {
-      render(<KeyboardTester searchHandler={searchHandler} />)
+      render(<App />)
       fireEvent.click(document.body);
     });
     it('Should initially be lowercase', async function () {
