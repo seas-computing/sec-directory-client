@@ -3,7 +3,7 @@ import 'react-simple-keyboard/build/css/index.css';
 import './Keyboard.css';
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
-import { DISPLAY_WIDTH, DISPLAY_HEIGHT } from '../const/display';
+import { DISPLAY_WIDTH, DISPLAY_HEIGHT } from '../const';
 
 interface OnScreenKeyboardProps {
   /**
@@ -18,7 +18,16 @@ interface OnScreenKeyboardProps {
    * A handler to initiate a search
    */
   triggerSearchHandler: () => void;
+  /**
+  * Whether to show the keyboard on screen
+  */
+  isVisible: boolean;
+  /**
+  * Toggle the visibility of the keyboard
+  */
+  setVisible: (arg0: boolean) => void;
 }
+
 
 
 /**
@@ -39,11 +48,9 @@ const OnScreenKeyboard = ({
   searchQuery,
   searchUpdateHandler,
   triggerSearchHandler,
+  isVisible,
+  setVisible,
 }: OnScreenKeyboardProps) => {
-  /**
-   * Whether the keyboard should be shown on screen.
-   */
-  const [isVisible, setVisible] = useState(false);
 
   /**
    * Set a ref to the modal for updating placement, etc.
