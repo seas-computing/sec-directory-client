@@ -1,0 +1,41 @@
+name: Test and Build
+# Runs on all pushes and PR's
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+jobs:
+  test:
+    name: Run test suite
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        # Pip and system dependencies needed inside the container
+      - uses: actions/setup-node@v2
+        with:
+          node_version: 14
+      - name: Install Dependencies
+        run: npm install
+      - name: Run Tests 
+        run: npm run test
+  build:
+    name: Build front end bundle 
+    # Only build container when code has been merged into main
+    # if: github.event_name == 'push' && github.ref == 'main'
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node_version: 14
+      - name: Install Dependencies
+        run: npm install
+      - name: Build bundle
+        run: npm run build
+      - name: Publish Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: sec-directory-client
+          path: build/
