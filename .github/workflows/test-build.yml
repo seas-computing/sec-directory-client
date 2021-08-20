@@ -37,7 +37,13 @@ jobs:
           npm version patch -m "Automatic bump to %s"
           echo "LATEST_TAG=$(jq -Mr .version package.json)" >> $GITHUB_ENV
       - name: Push back to branch
-        run: git push --tags origin ${{ github.ref }}
+        run: |
+          git config --local user.name "SEAS COMPUTING ROBOT"
+          git config --local user.email "computing-dev-team@seas.harvard.edu"
+          git config --local push.default matching
+          git config credential.helper "store --file=.git/credentials"
+          echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
+          git push --tags origin ${{ github.ref }}
       - name: Build bundle
         run: npm run build
       - name: Publish Artifact
