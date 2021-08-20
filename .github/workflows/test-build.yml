@@ -53,14 +53,14 @@ jobs:
             const fs = require('fs');
             const [owner, repo] = process.env.GITHUB_REPOSITORY.split('/');
             const tag = process.env.LATEST_TAG;
-            const { id: release_id } = await github.rest.repos.createRelease({
+            const { id: release_id } = await github.repos.createRelease({
               owner,
               repo,
               tag
             });
             const name = 'sec-directory-client.tar.gz';
             const data = fs.readFileSync('./sec-directory-client.tar.gz');
-            await github.rest.repos.uploadReleaseAsset({
+            await github.repos.uploadReleaseAsset({
               owner,
               repo,
               release_id,
