@@ -40,7 +40,7 @@ jobs:
           git config credential.helper "store --file=.git/credentials"
           echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
           npm version patch -m "Automatic bump to %s"
-          echo "LATEST_TAG=$(jq -Mr .version package.json)" >> $GITHUB_ENV
+          echo "LATEST_TAG=v$(jq -Mr .version package.json)" >> $GITHUB_ENV
           git push --tags origin ${{ github.ref }}
       - name: Build bundle
         run: |
