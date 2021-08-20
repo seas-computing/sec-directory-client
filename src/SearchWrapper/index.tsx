@@ -1,13 +1,15 @@
 import algoliasearch from 'algoliasearch/lite';
-import { useEffect } from 'react';
-import { InstantSearch, Hits, Configure, connectSearchBox } from 'react-instantsearch-dom';
+import { ReactNode, useEffect } from 'react';
+import { InstantSearch, Configure, connectSearchBox } from 'react-instantsearch-dom';
 import { ALGOLIA_APP_ID, ALGOLIA_API_KEY, ALGOLIA_INDEX } from '../const';
 
 const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
 
-interface searchProps {
+interface SearchProps {
   /** The text to search against algolia */
   searchQuery: string;
+  /** The components that will display the actual search results */
+  children: ReactNode;
 }
 
 /**
@@ -24,9 +26,10 @@ const Query = connectSearchBox(
 
 /**
 * Wrapper around the Algolia InstantSearch components that just runs the query
-* provided by the searchQuery prop and displays the results
+* provided by the searchQuery prop. Display of the results is handled by the
+* children components
 */
-const Search = ({ searchQuery }: searchProps) => {
+const SearchWrapper = ({ searchQuery, children }: SearchProps) => {
   return (
     <InstantSearch 
       searchClient={searchClient}
@@ -40,8 +43,8 @@ const Search = ({ searchQuery }: searchProps) => {
         enablePersonalization={false}
         distinct
       />
-        <Hits />
+        {children}
     </InstantSearch>);
 }
 
-export default Search;
+export default SearchWrapper;
