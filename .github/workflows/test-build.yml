@@ -16,7 +16,7 @@ jobs:
         with:
           node-version: 14
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
       - name: Run Tests 
         run: npm run test
   build:
@@ -31,7 +31,7 @@ jobs:
         with:
           node-version: 14
       - name: Install Dependencies
-        run: npm install
+        run: npm ci
       - name: update patch version number
         run: |
           npm version patch -m "Automatic bump to %s"
