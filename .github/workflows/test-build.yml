@@ -32,6 +32,12 @@ jobs:
           node-version: 14
       - name: Install Dependencies
         run: npm install
+      - name: update patch version number
+        run: |
+          npm version patch -m "Automatic bump to %s"
+          echo "LATEST_TAG=$(jq -Mr .version package.json)" >> $GITHUB_ENV
+      - name: Push back to branch
+        run: git push --tags origin ${{ github.ref }}
       - name: Build bundle
         run: npm run build
       - name: Publish Artifact
