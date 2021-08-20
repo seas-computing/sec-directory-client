@@ -60,7 +60,7 @@ jobs:
             });
             const name = 'sec-directory-client.tar.gz';
             const data = fs.readFileSync('./sec-directory-client.tar.gz');
-            const github.rest.repos.uploadReleaseAsset({
+            await github.rest.repos.uploadReleaseAsset({
               owner,
               repo,
               release_id,
