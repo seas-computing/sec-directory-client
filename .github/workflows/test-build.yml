@@ -58,14 +58,15 @@ jobs:
               repo,
               tag_name
             });
-            core.debug(newRelease);
-            const { id: release_id } = newRelease;
-            const name = 'sec-directory-client.tar.gz';
+            const { data: { id: release_id, url } } = newRelease;
+            core.info(`Published ${tag_name}: ${url}`)
+            const name = `sec-directory-client_${tag_name}.tar.gz`;
             const data = fs.readFileSync('./sec-directory-client.tar.gz');
-            await github.repos.uploadReleaseAsset({
+            const { data: { url: asset_url } } =  await github.repos.uploadReleaseAsset({
               owner,
               repo,
               release_id,
               name,
               data,
             });
+            core.info(`Published ${name}: ${asset_url}`);
