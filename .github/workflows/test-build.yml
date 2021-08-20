@@ -21,8 +21,8 @@ jobs:
         run: npm run test
   build:
     name: Build front end bundle 
-    # Only build container when code has been merged into main
-    # if: github.event_name == 'push' && github.ref == 'main'
+    # Only build bundle when code has been merged into main
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -32,6 +32,9 @@ jobs:
           node-version: 14
       - name: Install Dependencies
         run: npm ci
+      # We need to log in as our robot account to attach a name/id to the
+      # commit, or else this step fails.  We're still using the token that
+      # GitHub Actions automatically generates
       - name: update patch version number and push back to branch
         run: |
           git config --local user.name "SEAS COMPUTING ROBOT"
@@ -46,6 +49,8 @@ jobs:
         run: |
           npm run build
           tar -czvf sec-directory-client.tar.gz build/*
+      # Runs a script to create a new release on github, matching the tag set
+      # above, and publish the built application as an asset on that release
       - name: Publish Bundle
         uses: actions/github-script@v4
         with:
