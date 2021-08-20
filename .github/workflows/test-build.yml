@@ -32,17 +32,15 @@ jobs:
           node-version: 14
       - name: Install Dependencies
         run: npm ci
-      - name: update patch version number
-        run: |
-          npm version patch -m "Automatic bump to %s"
-          echo "LATEST_TAG=$(jq -Mr .version package.json)" >> $GITHUB_ENV
-      - name: Push back to branch
+      - name: update patch version number and push back to branch
         run: |
           git config --local user.name "SEAS COMPUTING ROBOT"
           git config --local user.email "computing-dev-team@seas.harvard.edu"
           git config --local push.default matching
           git config credential.helper "store --file=.git/credentials"
           echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
+          npm version patch -m "Automatic bump to %s"
+          echo "LATEST_TAG=$(jq -Mr .version package.json)" >> $GITHUB_ENV
           git push --tags origin ${{ github.ref }}
       - name: Build bundle
         run: npm run build
