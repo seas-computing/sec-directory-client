@@ -52,11 +52,11 @@ jobs:
           script: |
             const fs = require('fs');
             const [owner, repo] = process.env.GITHUB_REPOSITORY.split('/');
-            const tag = process.env.LATEST_TAG;
+            const tag_name = process.env.LATEST_TAG;
             const { id: release_id } = await github.repos.createRelease({
               owner,
               repo,
-              tag
+              tag_name
             });
             const name = 'sec-directory-client.tar.gz';
             const data = fs.readFileSync('./sec-directory-client.tar.gz');
