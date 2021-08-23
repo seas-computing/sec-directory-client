@@ -1,9 +1,10 @@
 .search-pagination--wrapper {
   display: grid;
-  grid-template-columns: [prev] 1fr [next] 1fr;
-  justify-items: center;
-  width: 100%;
+  grid-template-columns: [prev] 1fr [count] 2fr [next] 1fr;
+  grid-template-rows: max-content;
+  align-items: stretch;
   margin: 1em 0;
+  column-gap: 2em;
 }
 
 .search-pagination--button {
@@ -14,6 +15,7 @@
   padding: 0.5em 2em;
   color: white;
   line-height: 1.5em;
+  align-self: start;
 }
 
 .button__prev {
@@ -23,4 +25,3 @@
 .button__next {
   grid-area: next;
 }
-

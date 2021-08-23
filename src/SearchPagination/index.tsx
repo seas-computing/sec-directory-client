@@ -1,4 +1,5 @@
 import { connectPagination } from "react-instantsearch-dom";
+import SearchCount from '../SearchCount';
 import './SearchPagination.css';
 
 /**
@@ -38,6 +39,7 @@ const SearchPagination = ({
            Prev
          </button>
        )}
+         <SearchCount />
        {nextPage !== null && (
          <button 
            className="search-pagination--button button__next"
