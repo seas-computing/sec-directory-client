@@ -2,6 +2,7 @@ import algoliasearch from 'algoliasearch/lite';
 import { ReactNode, useEffect } from 'react';
 import { InstantSearch, Configure, connectSearchBox } from 'react-instantsearch-dom';
 import { ALGOLIA_APP_ID, ALGOLIA_API_KEY, ALGOLIA_INDEX } from '../const';
+import './SearchWrapper.css';
 
 const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
 
@@ -43,7 +44,9 @@ const SearchWrapper = ({ searchQuery, children }: SearchProps) => {
         enablePersonalization={false}
         distinct
       />
-        {children}
+        <div className="search-wrapper">
+          {children}
+        </div>
     </InstantSearch>);
 }
 
