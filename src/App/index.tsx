@@ -7,7 +7,6 @@ import Welcome from '../Welcome';
 import SearchHeader from '../SearchHeader';
 import SearchWrapper from '../SearchWrapper';
 import SearchResults from '../SearchResults';
-import SearchResultsCount from '../SearchResultsCount';
 import SearchPagination from '../SearchPagination';
 import OnScreenKeyboard from '../Keyboard';
 import {
@@ -119,11 +118,9 @@ const App = () => {
             <SearchHeader bannerText={WELCOME_BANNER}>
               {WELCOME_INSTRUCTIONS}
             </SearchHeader>
-            <SearchResultsCount />
             <SearchPagination />
             <SearchResults />
             <SearchPagination />
-            <SearchResultsCount />
           </SearchWrapper>
         )}
         <OnScreenKeyboard
