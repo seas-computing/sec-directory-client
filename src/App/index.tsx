@@ -4,8 +4,11 @@ import Footer from '../Footer';
 import Main from '../Main';
 import { useEffect, useRef, useState } from 'react';
 import Welcome from '../Welcome';
+import SearchHeader from '../SearchHeader';
 import SearchWrapper from '../SearchWrapper';
 import SearchResults from '../SearchResults';
+import SearchResultsCount from '../SearchResultsCount';
+import SearchPagination from '../SearchPagination';
 import OnScreenKeyboard from '../Keyboard';
 import {
   VIEW,
@@ -31,7 +34,7 @@ const App = () => {
   /**
    * The content that should be shown in the Main section
    */
-  const [currentView, setView] = useState<VIEW>(VIEW.WELCOME);
+  const [currentView, setView] = useState<VIEW>(VIEW.RESULTS);
 
   /**
    * A reference to the background div, used for adding/removing event handlers
@@ -113,7 +116,14 @@ const App = () => {
           <SearchWrapper
             searchQuery={searchInput}
           >
+            <SearchHeader bannerText={WELCOME_BANNER}>
+              {WELCOME_INSTRUCTIONS}
+            </SearchHeader>
+            <SearchResultsCount />
+            <SearchPagination />
             <SearchResults />
+            <SearchPagination />
+            <SearchResultsCount />
           </SearchWrapper>
         )}
         <OnScreenKeyboard
