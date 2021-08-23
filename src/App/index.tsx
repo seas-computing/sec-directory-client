@@ -115,7 +115,7 @@ const App = () => {
           <SearchWrapper
             searchQuery={searchInput}
           >
-            <SearchHeader bannerText={WELCOME_BANNER}>
+            <SearchHeader>
               {WELCOME_INSTRUCTIONS}
             </SearchHeader>
             <SearchPagination />

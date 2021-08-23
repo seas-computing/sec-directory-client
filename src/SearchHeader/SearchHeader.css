@@ -1,15 +1,3 @@
-.search-results--banner {
-  background-color: var(--crimson);
-  padding: 1em;
-}
-
-.search-results--banner-text {
-  color: #fff;
-  font-weight: 300;
-  font-size: 3.5rem;
-  text-align: left;
-}
-
 .search-results--message {
   padding: 1.5rem;
 }
