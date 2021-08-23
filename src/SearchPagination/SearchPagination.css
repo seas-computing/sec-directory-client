@@ -1,0 +1,26 @@
+.search-pagination--wrapper {
+  display: grid;
+  grid-template-columns: [prev] 1fr [next] 1fr;
+  justify-items: center;
+  width: 100%;
+  margin: 1em 0;
+}
+
+.search-pagination--button {
+  font-size: 2em;
+  background: #28a745;
+  border: none;
+  border-radius: none;
+  padding: 0.5em 2em;
+  color: white;
+  line-height: 1.5em;
+}
+
+.button__prev {
+  grid-area: prev;
+}
+
+.button__next {
+  grid-area: next;
+}
+
