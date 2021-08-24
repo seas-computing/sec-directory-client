@@ -31,7 +31,7 @@ const SearchPagination = ({
        {prevPage !== null && (
          <button
            className="search-pagination--button button__prev"
-           onClick={(evt) => { 
+           onPointerDown={(evt) => {
              evt.stopPropagation();
              refine(prevPage);
            }}
@@ -43,7 +43,7 @@ const SearchPagination = ({
        {nextPage !== null && (
          <button 
            className="search-pagination--button button__next"
-           onClick={(evt) => { 
+           onPointerDown={(evt) => {
              evt.stopPropagation();
              refine(nextPage); 
            }}

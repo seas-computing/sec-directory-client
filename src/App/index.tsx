@@ -61,11 +61,11 @@ const App = () => {
         }
       };
       if (background) {
-        background.addEventListener('click', closeKeyboard);
+        background.addEventListener('pointerdown', closeKeyboard);
       }
       return(() => {
         if (background) {
-          background.removeEventListener('click', closeKeyboard);
+          background.removeEventListener('pointerdown', closeKeyboard);
         }
       });
     }
@@ -75,9 +75,9 @@ const App = () => {
       setKeyboardCoordinates([evt.clientX, evt.clientY]);
       setView(VIEW.SEARCH);
     };
-    document.body.addEventListener('click', openKeyboard);
+    document.body.addEventListener('pointerdown', openKeyboard);
     return(() => {
-      document.body.removeEventListener('click', openKeyboard);
+      document.body.removeEventListener('pointerdown', openKeyboard);
     })
   }, [
     isKeyboardVisible,
