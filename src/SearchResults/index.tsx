@@ -1,4 +1,4 @@
-import { connectHits, HitsProvided } from "react-instantsearch-core";
+import { connectHits, HitsProvided } from 'react-instantsearch-core';
 import './SearchResults.css';
 
 /**
