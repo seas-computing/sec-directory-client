@@ -51,6 +51,10 @@ jobs:
           echo "LATEST_TAG=v$(jq -Mr .version package.json)" >> $GITHUB_ENV
           # git push --tags origin ${{ github.ref }}
       - name: Build bundle
+        env:
+          REACT_APP_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY_PROD }}
+          REACT_APP_ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          REACT_APP_ALGOLIA_INDEX: ${{ secrets.ALGOLIA_INDEX_PROD }}
         run: |
           npm run build
           tar -czvf sec-directory-client.tar.gz build/*
@@ -58,10 +62,6 @@ jobs:
       # above, and publish the built application as an asset on that release
       - name: Publish Bundle
         uses: actions/github-script@v4
-        env:
-          REACT_APP_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY_PROD }}
-          REACT_APP_ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
-          REACT_APP_ALGOLIA_INDEX: ${{ secrets.ALGOLIA_INDEX_PROD }}
         with:
           script: |
             const fs = require('fs');
