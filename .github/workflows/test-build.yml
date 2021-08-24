@@ -26,7 +26,8 @@ jobs:
   build:
     name: Build front end bundle 
     # Only build bundle when code has been merged into main
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name == 'push' 
+      # && github.ref == 'refs/heads/main'
     needs: test
     runs-on: ubuntu-latest
     steps:
@@ -48,7 +49,7 @@ jobs:
           echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
           npm version patch -m "Automatic bump to %s"
           echo "LATEST_TAG=v$(jq -Mr .version package.json)" >> $GITHUB_ENV
-          git push --tags origin ${{ github.ref }}
+          # git push --tags origin ${{ github.ref }}
       - name: Build bundle
         run: |
           npm run build
