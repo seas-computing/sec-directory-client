@@ -176,7 +176,7 @@ const OnScreenKeyboard = ({
           <div className="keyboard--keyboard-container">
             <Keyboard
               onChange={searchUpdateHandler}
-              onKeyPress={otherKeyHandler}
+              onKeyReleased={otherKeyHandler}
               layoutName={
                 [CASE.LOCKED, CASE.SHIFTED].includes(keyboardCase)
                   ? 'shift'
