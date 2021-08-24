@@ -4,7 +4,7 @@ import './SearchResults.css';
 /**
 * Represents the data returned in a search results
 */
-interface DirectoryEntry {
+export interface DirectoryEntry {
   /**
    * The name of the person or place
    */
@@ -18,7 +18,7 @@ interface DirectoryEntry {
 /**
 * Displays the search results as an unordered list of names and locations
 */
-const ResultsList = ({hits}: HitsProvided<DirectoryEntry>) => (
+export const ResultsList = ({hits}: HitsProvided<DirectoryEntry>) => (
   <div className="app-search-results">
     <ul className="app-search-results--list">
       {hits.map(({objectID, name, location}) => (
