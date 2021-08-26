@@ -1,0 +1,85 @@
+name: Test and Build
+# Runs on all pushes and PR's
+on:
+  push:
+    branches:
+      - "**"
+  pull_request:
+jobs:
+  test:
+    name: Run test suite
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+        # Pip and system dependencies needed inside the container
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Install Dependencies
+        run: npm ci
+      - name: Run Tests 
+        env:
+          REACT_APP_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY_TEST }}
+          REACT_APP_ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          REACT_APP_ALGOLIA_INDEX: ${{ secrets.ALGOLIA_INDEX_TEST }}
+        run: npm run test
+  build:
+    name: Build front end bundle 
+    # Only build bundle when code has been merged into main
+    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v2
+        with:
+          node-version: 14
+      - name: Install Dependencies
+        run: npm ci
+      # We need to log in as our robot account to attach a name/id to the
+      # commit, or else this step fails.  We're still using the token that
+      # GitHub Actions automatically generates
+      - name: update patch version number and push back to branch
+        run: |
+          git config --local user.name "SEAS COMPUTING ROBOT"
+          git config --local user.email "computing-dev-team@seas.harvard.edu"
+          git config --local push.default matching
+          git config credential.helper "store --file=.git/credentials"
+          echo "https://${GITHUB_TOKEN}:@github.com" > .git/credentials
+          npm version patch -m "Automatic bump to %s"
+          echo "LATEST_TAG=v$(jq -Mr .version package.json)" >> $GITHUB_ENV
+          git push --tags origin ${{ github.ref }}
+      - name: Build bundle
+        env:
+          REACT_APP_ALGOLIA_API_KEY: ${{ secrets.ALGOLIA_API_KEY_PROD }}
+          REACT_APP_ALGOLIA_APP_ID: ${{ secrets.ALGOLIA_APP_ID }}
+          REACT_APP_ALGOLIA_INDEX: ${{ secrets.ALGOLIA_INDEX_PROD }}
+        run: |
+          npm run build
+          tar -czvf sec-directory-client.tar.gz build/*
+      # Runs a script to create a new release on github, matching the tag set
+      # above, and publish the built application as an asset on that release
+      - name: Publish Bundle
+        uses: actions/github-script@v4
+        with:
+          script: |
+            const fs = require('fs');
+            const [owner, repo] = process.env.GITHUB_REPOSITORY.split('/');
+            const tag_name = process.env.LATEST_TAG;
+            const newRelease = await github.repos.createRelease({
+              owner,
+              repo,
+              tag_name
+            });
+            const { data: { id: release_id, html_url } } = newRelease;
+            core.info(`Published ${tag_name}: ${html_url}`)
+            const name = `sec-directory-client_${tag_name}.tar.gz`;
+            const data = fs.readFileSync('./sec-directory-client.tar.gz');
+            const { data: { browser_download_url } } =  await github.repos.uploadReleaseAsset({
+              owner,
+              repo,
+              release_id,
+              name,
+              data,
+            });
+            core.info(`Published ${name}: ${browser_download_url}`);
