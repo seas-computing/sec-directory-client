@@ -50,7 +50,7 @@ describe('App', function () {
       //Get halfway through the timer
       jest.advanceTimersByTime(RELOAD_INTERVAL_MS * 0.5);
       //Open the keyboard
-      fireEvent.click(document.body);
+      fireEvent.pointerDown(document.body);
       // Go 75% through the new timer, so we should be at total 125% of our
       // elapsed time
       jest.advanceTimersByTime(RELOAD_INTERVAL_MS * 0.75);
