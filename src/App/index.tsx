@@ -33,7 +33,7 @@ const App = () => {
   /**
    * The content that should be shown in the Main section
    */
-  const [currentView, setView] = useState<VIEW>(VIEW.RESULTS);
+  const [currentView, setView] = useState<VIEW>(VIEW.WELCOME);
 
   /**
    * A reference to the background div, used for adding/removing event handlers
