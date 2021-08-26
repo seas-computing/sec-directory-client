@@ -18,19 +18,19 @@ describe('Keyboard', function () {
     });
     describe('After clicking on document.body', function () {
       beforeEach(function() {
-        fireEvent.click(document.body);
+        fireEvent.pointerDown(document.body);
       });
       it('Should appear after clicking on the body', async function () {
         expect(screen.queryByRole('dialog')).toBeInTheDocument();
       });
       describe('After clicking outside the modal', function () {
         beforeEach(function() {
-          fireEvent.click(document.querySelector('.keyboard--backdrop')!);
+          fireEvent.pointerDown(document.querySelector('.keyboard--backdrop')!);
         });
         it('Should disappear', function () {
           expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
         });
-      });
+      })
       describe('After clicking cancel', function () {
         beforeEach(function() {
           fireEvent.click(screen.getByText('cancel'));
@@ -41,7 +41,7 @@ describe('Keyboard', function () {
       });
       describe('After clicking enter', function () {
         beforeEach(function() {
-          fireEvent.click(screen.getByText('< enter'));
+          fireEvent.mouseUp(screen.getByText('< enter'));
         });
         it('Should disappear', function () {
           expect(screen.queryByRole('dialog')).not.toBeInTheDocument();
@@ -60,7 +60,7 @@ describe('Keyboard', function () {
   describe('Input display', function () {
     beforeEach(function () {
       render(<App />);
-      fireEvent.click(document.body);
+      fireEvent.pointerDown(document.body);
     });
     it('Should display the text entered in the keys', function () {
       fireEvent.click(screen.getByText('s')) 
@@ -73,7 +73,7 @@ describe('Keyboard', function () {
   describe('Upper- and lower-case handling', function () {
     beforeEach(function () {
       render(<App />)
-      fireEvent.click(document.body);
+      fireEvent.pointerDown(document.body);
     });
     it('Should initially be lowercase', async function () {
       const lowercase = await screen.findByText('a');
