@@ -133,10 +133,11 @@ describe.only('End to End testing', function () {
       });
 
       // Click the Next button
-      expect(screen.queryAllByText('Next')[0]).toBeInTheDocument();
+      const nextButtons = await screen.findAllByText('Next');
+      expect(nextButtons).toHaveLength(2);
       expect(screen.queryByText('Prev')).not.toBeInTheDocument();
       act(() => {
-        userEvent.click(screen.getAllByText('Next')[0]);
+        userEvent.click(nextButtons[0]);
       });
 
       // Make sure the second page of results is accurate
@@ -149,13 +150,14 @@ describe.only('End to End testing', function () {
       });
 
       // Click the previous button
-      await screen.findAllByText('Prev');
+      const prevButtons = await screen.findAllByText('Prev');
+      expect(prevButtons).toHaveLength(2);
       act(() => {
-        userEvent.click(screen.getAllByText('Prev')[0]);
+        userEvent.click(prevButtons[0]);
       });
-      await screen.findByText(firstPage[0].name)
 
       // Make sure we're still getting the same first page
+      await screen.findByText(firstPage[0].name)
       const prevResults = screen.queryAllByRole('listitem');
       expect(prevResults.map(({textContent}) => textContent))
         .toEqual(results.map(({textContent}) => textContent));
