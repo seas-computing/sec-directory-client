@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 import './Main.css';
 
-interface MainProps { 
-  /** 
+interface MainProps {
+  /**
    * The content that should be displayed inside the Main section of the page
    */
   children: ReactNode

@@ -17,7 +17,7 @@ export const SearchCount = ({ searchResults }: Partial<StateResultsProvided>) =>
         </p>
       </>
     );
-  } 
+  }
   return null;
 };
 

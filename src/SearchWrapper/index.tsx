@@ -16,7 +16,7 @@ interface SearchProps {
 /**
 * The InstantSearch library only runs the actual search when the refine
 * function in the SearchBox component is called, so we have a null version of
-* the SearchBox to handle that for us 
+* the SearchBox to handle that for us
 */
 
 const Query = connectSearchBox(
@@ -32,7 +32,7 @@ const Query = connectSearchBox(
 */
 const SearchWrapper = ({ searchQuery, children }: SearchProps) => {
   return (
-    <InstantSearch 
+    <InstantSearch
       searchClient={searchClient}
       indexName={ALGOLIA_INDEX}
       refresh

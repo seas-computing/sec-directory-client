@@ -142,7 +142,7 @@ const App = () => {
             setKeyboardVisible(false);
             setView(VIEW.RESULTS)
           }}
-        /> 
+        />
       </Main>
       <Footer />
     </div>

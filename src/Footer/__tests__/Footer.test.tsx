@@ -7,6 +7,6 @@ describe('Footer', function () {
       jest.useFakeTimers('modern').setSystemTime(new Date(2020, 0, 1))
       const { getByText } = render(<Footer />);
       expect(getByText(2020, {exact: false})).toBeInTheDocument();
-    }); 
+    });
   });
 });
