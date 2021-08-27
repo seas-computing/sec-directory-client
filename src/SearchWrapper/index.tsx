@@ -1,7 +1,7 @@
 import algoliasearch from 'algoliasearch/lite';
 import { ReactNode, useEffect } from 'react';
 import { InstantSearch, Configure, connectSearchBox } from 'react-instantsearch-dom';
-import { ALGOLIA_APP_ID, ALGOLIA_API_KEY, ALGOLIA_INDEX } from '../const';
+import { ALGOLIA_APP_ID, ALGOLIA_API_KEY, ALGOLIA_INDEX, ALGOLIA_HITS_PER_PAGE } from '../const';
 import './SearchWrapper.css';
 
 const searchClient = algoliasearch(ALGOLIA_APP_ID, ALGOLIA_API_KEY);
@@ -39,7 +39,7 @@ const SearchWrapper = ({ searchQuery, children }: SearchProps) => {
     >
       <Query defaultRefinement={searchQuery} />
       <Configure
-        hitsPerPage={8}
+        hitsPerPage={ALGOLIA_HITS_PER_PAGE}
         analytics={false}
         enablePersonalization={false}
         distinct
