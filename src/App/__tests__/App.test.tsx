@@ -1,4 +1,6 @@
-import { fireEvent, render, screen, waitForElementToBeRemoved } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
+import { act } from 'react-dom/test-utils';
 import App from '..';
 import {
   RELOAD_INTERVAL_MS,
@@ -50,7 +52,9 @@ describe('App', function () {
       //Get halfway through the timer
       jest.advanceTimersByTime(RELOAD_INTERVAL_MS * 0.5);
       //Open the keyboard
-      fireEvent.pointerDown(document.body);
+      act(() => {
+        userEvent.click(document.body);
+      });
       // Go 75% through the new timer, so we should be at total 125% of our
       // elapsed time
       jest.advanceTimersByTime(RELOAD_INTERVAL_MS * 0.75);
