@@ -1,5 +1,5 @@
+import { ReactNode } from "react";
 import { connectPagination } from "react-instantsearch-dom";
-import SearchCount from '../SearchCount';
 import './SearchPagination.css';
 
 /**
@@ -13,12 +13,18 @@ interface SearchPaginationProps {
   nbPages: number;
   /** the function to move to a new page */
   refine: (arg0: number) => void;
+  /**
+   * content that should appear between the buttons, used to show the total
+   * number of results
+   */
+  children?: ReactNode;
 }
 
-const SearchPagination = ({
+export const SearchPagination = ({
   currentRefinement,
   nbPages,
   refine,
+  children,
 }: SearchPaginationProps) => {
   const nextPage = nbPages > currentRefinement 
     ? currentRefinement + 1 
@@ -39,7 +45,9 @@ const SearchPagination = ({
            Prev
          </button>
        )}
-         <SearchCount />
+      <div className="search-pagination--count-wrapper">
+         {children}
+      </div>
        {nextPage !== null && (
          <button 
            className="search-pagination--button button__next"

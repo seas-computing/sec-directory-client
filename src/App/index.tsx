@@ -4,6 +4,7 @@ import Footer from '../Footer';
 import Main from '../Main';
 import { useEffect, useRef, useState } from 'react';
 import Welcome from '../Welcome';
+import SearchCount from '../SearchCount';
 import SearchHeader from '../SearchHeader';
 import SearchWrapper from '../SearchWrapper';
 import SearchResults from '../SearchResults';
@@ -118,9 +119,13 @@ const App = () => {
             <SearchHeader>
               {WELCOME_INSTRUCTIONS}
             </SearchHeader>
-            <SearchPagination />
+            <SearchPagination>
+              <SearchCount/>
+            </SearchPagination>
             <SearchResults />
-            <SearchPagination />
+            <SearchPagination>
+              <SearchCount/>
+            </SearchPagination>
           </SearchWrapper>
         )}
         <OnScreenKeyboard
