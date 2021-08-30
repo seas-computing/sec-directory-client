@@ -73,7 +73,7 @@ const OnScreenKeyboard = ({
   const [keyboardCase, setKeyboardCase] = useState<CASE>(CASE.DEFAULT);
 
   /**
-   * Handles the logic for controlling the shift and caps-log keys. The
+   * Handles the logic for controlling the shift and caps-lock keys. The
    * capitalization is not built into the keyboard library unfortunately, and I
    * think that leaving out the upper/lower case functionality might be more
    * confusing for users.
