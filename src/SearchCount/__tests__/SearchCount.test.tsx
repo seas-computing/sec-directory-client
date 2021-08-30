@@ -38,7 +38,7 @@ describe('Search Count Description', function () {
       nbHits: 42,
       query: '',
     } as SearchResults;
-    it('should show ""', function  () {
+    it('should show "" in the query field', function  () {
       render(<SearchCount searchResults={testSearchResults} />);
       expect(screen.getByText('""')).toBeInTheDocument();
     });
