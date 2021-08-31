@@ -11,9 +11,9 @@ import { Hit } from '@algolia/client-search';
 describe.only('End to End testing', function () {
   let index: SearchIndex
   const timeout = 5000;
+  jest.retryTimes(3).setTimeout(30000);
 
   beforeEach(function () {
-    jest.setTimeout(30000);
     // Initialize a connection to algolia and render the App
     const client = algoliasearch(
       ALGOLIA_APP_ID,
