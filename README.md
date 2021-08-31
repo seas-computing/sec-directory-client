@@ -34,7 +34,7 @@ The only outbound data connections are to Algolia, so the server project does no
 
 ### Testing
 
-`npm run test` Will run the Jest test suite. By default, jest will run in watch mode and re-run tests whenever the code changes on disk. For more information on Jest and its features, see [the project homepage][jest].
+`npm run test` will run the Jest test suite. By default, Jest will run in watch mode and re-run tests whenever the code changes on disk. For more information on Jest and its features, see [the project homepage][jest].
 
 For testing our front-end code, we're relying on [React Testing Library][rtl] and favoring behavior-based testing.
 
