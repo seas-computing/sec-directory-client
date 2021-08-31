@@ -2,6 +2,8 @@
 
 [![Test and Build](https://github.com/seas-computing/sec-directory-client/actions/workflows/test-build.yml/badge.svg)](https://github.com/seas-computing/sec-directory-client/actions/workflows/test-build.yml)
 
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)
+
 This is the react-based client application for the Directory Screen on the SEAS Allston Campus. It was bootstrapped with [Create React App][cra] using the default Typescript template.
 
 This is meant to be used in conjunction with the [sec-directory-server][server] project, which is responsible for populating the Algolia database.
