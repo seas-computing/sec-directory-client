@@ -1,10 +1,8 @@
 # SEC Directory Screens Client
 
 [![Test and Build](https://github.com/seas-computing/sec-directory-client/actions/workflows/test-build.yml/badge.svg)](https://github.com/seas-computing/sec-directory-client/actions/workflows/test-build.yml)
-
-[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](code-of-conduct.md)
-
-![BSD License](https://img.shields.io/github/license/seas-computing/mark-one)
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-v1.4%20adopted-ff69b4.svg)](CODE_OF_CONDUCT.md)
+[![BSD License](https://img.shields.io/github/license/seas-computing/mark-one)](LICENSE)
 
 This is the react-based client application for the Directory Screen on the SEAS Allston Campus. It was bootstrapped with [Create React App][cra] using the default Typescript template.
 
