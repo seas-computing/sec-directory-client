@@ -1,5 +1,7 @@
 # SEC Directory Screens Client
 
+[![Test and Build](https://github.com/seas-computing/sec-directory-client/actions/workflows/test-build.yml/badge.svg)](https://github.com/seas-computing/sec-directory-client/actions/workflows/test-build.yml)
+
 This is the react-based client for the Directory Screen on the SEAS Allston Campus. It was bootstrapped with [Create React App][cra] using the default Typescript template.
 
 ## Setup
