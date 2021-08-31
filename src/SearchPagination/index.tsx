@@ -26,34 +26,28 @@ export const SearchPagination = ({
   refine,
   children,
 }: SearchPaginationProps) => {
-  const nextPage = nbPages > currentRefinement
-    ? currentRefinement + 1
-    : null;
-  const prevPage = currentRefinement > 1
-    ? currentRefinement - 1
-    : null;
    return (
      <div className="search-pagination--wrapper">
-       {prevPage !== null && (
+       {currentRefinement > 1 && (
          <button
            className="search-pagination--button button__prev"
            onPointerDown={(evt) => {
              evt.stopPropagation();
-             refine(prevPage);
+             refine(currentRefinement - 1);
            }}
          >
            Prev
          </button>
        )}
-      <div className="search-pagination--count-wrapper">
+       <div className="search-pagination--count-wrapper">
          {children}
-      </div>
-       {nextPage !== null && (
+       </div>
+       {nbPages > currentRefinement && (
          <button
            className="search-pagination--button button__next"
            onPointerDown={(evt) => {
              evt.stopPropagation();
-             refine(nextPage);
+             refine(currentRefinement + 1);
            }}
          >
           Next
