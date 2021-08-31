@@ -10,6 +10,7 @@ import { Hit } from '@algolia/client-search';
 
 describe.only('End to End testing', function () {
   let index: SearchIndex
+  const timeout = 5000;
 
   beforeEach(function () {
     // Initialize a connection to algolia and render the App
@@ -65,9 +66,17 @@ describe.only('End to End testing', function () {
       });
 
       // Make sure the name and number of results are shown
-      const resultsDescriptions = await screen.findAllByText('1 result for:');
+      const resultsDescriptions = await screen.findAllByText(
+        '1 result for:',
+        {},
+        { timeout }
+      );
       expect(resultsDescriptions).toHaveLength(2);
-      const queryDescriptions = await screen.findAllByText(`"${searchResult.name}"`);
+      const queryDescriptions = await screen.findAllByText(
+        `"${searchResult.name}"`,
+        {},
+        { timeout }
+      );
       expect(queryDescriptions).toHaveLength(2);
 
       // Check that the name and location appear in the results
@@ -116,9 +125,13 @@ describe.only('End to End testing', function () {
       });
 
       // Make sure it shows the total number of hits
-      const resultsDescriptions = await screen.findAllByText(`${totalHits} results for:`);
+      const resultsDescriptions = await screen.findAllByText(
+        `${totalHits} results for:`,
+        {},
+        { timeout }
+      );
       expect(resultsDescriptions).toHaveLength(2);
-      const queryDescriptions = await screen.findAllByText('""');
+      const queryDescriptions = await screen.findAllByText('""', {}, { timeout });
       expect(queryDescriptions).toHaveLength(2);
       expect(screen.queryByRole('list')).toBeInTheDocument();
 
@@ -133,7 +146,7 @@ describe.only('End to End testing', function () {
       });
 
       // Click the Next button
-      const nextButtons = await screen.findAllByText('Next');
+      const nextButtons = await screen.findAllByText('Next', {}, { timeout });
       expect(nextButtons).toHaveLength(2);
       expect(screen.queryByText('Prev')).not.toBeInTheDocument();
       act(() => {
@@ -150,7 +163,7 @@ describe.only('End to End testing', function () {
       });
 
       // Click the previous button
-      const prevButtons = await screen.findAllByText('Prev');
+      const prevButtons = await screen.findAllByText('Prev', {}, { timeout });
       expect(prevButtons).toHaveLength(2);
       act(() => {
         userEvent.click(prevButtons[0]);
@@ -182,9 +195,13 @@ describe.only('End to End testing', function () {
       });
 
       // Make sure there are no results
-      const resultsDescriptions = await screen.findAllByText('0 results for:');
+      const resultsDescriptions = await screen.findAllByText('0 results for:', {}, { timeout });
       expect(resultsDescriptions).toHaveLength(2);
-      const queryDescriptions = await screen.findAllByText(fakeSearchString, { exact: false });
+      const queryDescriptions = await screen.findAllByText(
+        fakeSearchString,
+        { exact: false },
+        { timeout }
+      );
       expect(queryDescriptions).toHaveLength(2);
       expect(screen.queryByRole('list')).toBeInTheDocument();
       expect(screen.queryByRole('listitem')).not.toBeInTheDocument();
