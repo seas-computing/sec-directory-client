@@ -10,6 +10,18 @@ This is the react-based client for the Directory Screen on the SEAS Allston Camp
 2. Run `npm install` to get all dependencies
 3. Copy `.env.example` to `.env` and populate with the desired Algolia details
 
+## Algolia
+
+The backend of the application is the Algolia search index defined in the `REACT_APP_ALGOLIA_INDEX`/`REACT_APP_ALGOLIA_APP_ID` environment variable. You'll also need to provide an API key in `REACT_APP_ALGOLIA_API_KEY`, which should only have "search" permissions for the specified index. **This API key will be included verbatim in the client code, so you should never use an admin key, or any key with write permission.** Best practice is [to create a "Secured API Key"][api-key] scoped only to the index you want to use.
+
+### Development Index
+
+Ideally, each developer working on the project should create their own Algolia index (and corresponding API Key) to use while developing. You can use the same index for both client and server operations, though the server application does require an API key with write permission.
+
+### Test Index
+
+You can optionally create a file called `.env.test` if you want to specify separate indices for testing and development. This is recommended, as some of the end-to-end tests defined in `src/__tests__/e2e.test.tsx` expect the index to include data.
+
 ## Local Development
 
 `npm run start` will bring up a live development environment with hot-reloading. Once it's started, you can view the app in the browser at http://localhost:3000/.
@@ -33,6 +45,7 @@ The official build of our code is handled by GitHub actions, and will be publish
 In production, the app will be server from an Amazon S3 bucket behind CloudFront.
 
 [cra]: https://create-react-app.dev/
+[api-key]: https://www.algolia.com/doc/guides/security/api-keys/#secured-api-keys
 [planar]: https://www.planar.com/products/large-format-displays/ps4k/planar-ps5561t/
 [rdm]: https://developer.mozilla.org/en-US/docs/Tools/Responsive_Design_Mode
 [jest]: https://jestjs.io/
