@@ -4,8 +4,11 @@ import Footer from '../Footer';
 import Main from '../Main';
 import { useEffect, useRef, useState } from 'react';
 import Welcome from '../Welcome';
+import SearchCount from '../SearchCount';
+import SearchHeader from '../SearchHeader';
 import SearchWrapper from '../SearchWrapper';
 import SearchResults from '../SearchResults';
+import SearchPagination from '../SearchPagination';
 import OnScreenKeyboard from '../Keyboard';
 import {
   VIEW,
@@ -59,11 +62,11 @@ const App = () => {
         }
       };
       if (background) {
-        background.addEventListener('click', closeKeyboard);
+        background.addEventListener('pointerdown', closeKeyboard);
       }
       return(() => {
         if (background) {
-          background.removeEventListener('click', closeKeyboard);
+          background.removeEventListener('pointerdown', closeKeyboard);
         }
       });
     }
@@ -73,9 +76,9 @@ const App = () => {
       setKeyboardCoordinates([evt.clientX, evt.clientY]);
       setView(VIEW.SEARCH);
     };
-    document.body.addEventListener('click', openKeyboard);
+    document.body.addEventListener('pointerdown', openKeyboard);
     return(() => {
-      document.body.removeEventListener('click', openKeyboard);
+      document.body.removeEventListener('pointerdown', openKeyboard);
     })
   }, [
     isKeyboardVisible,
@@ -113,7 +116,16 @@ const App = () => {
           <SearchWrapper
             searchQuery={searchInput}
           >
+            <SearchHeader>
+              {WELCOME_INSTRUCTIONS}
+            </SearchHeader>
+            <SearchPagination>
+              <SearchCount/>
+            </SearchPagination>
             <SearchResults />
+            <SearchPagination>
+              <SearchCount/>
+            </SearchPagination>
           </SearchWrapper>
         )}
         <OnScreenKeyboard
@@ -130,7 +142,7 @@ const App = () => {
             setKeyboardVisible(false);
             setView(VIEW.RESULTS)
           }}
-        /> 
+        />
       </Main>
       <Footer />
     </div>

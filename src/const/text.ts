@@ -16,4 +16,4 @@ export const WELCOME_BANNER = 'Welcome to Allston Campus';
  * The instructions for how to use the system which will be displayed on the
  * initial welcome screen
  */
-export const WELCOME_INSTRUCTIONS = 'Touch anywhere on this screen to search for SEAS offices and services, faculty and staff in the Allston Campus';
+export const WELCOME_INSTRUCTIONS = 'Touch anywhere on this screen to search for SEAS offices, faculty and staff in the Allston Campus';

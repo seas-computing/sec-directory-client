@@ -1,0 +1,35 @@
+.search-pagination--wrapper {
+  display: grid;
+  grid-template-columns: [prev] 1fr [count] 2fr [next] 1fr;
+  grid-template-rows: max-content;
+  align-items: stretch;
+  margin: 1em 0;
+  column-gap: 2em;
+}
+
+.search-pagination--button {
+  font-size: 2em;
+  background: #28a745;
+  border: none;
+  border-radius: none;
+  padding: 0.5em 2em;
+  color: white;
+  line-height: 1.5em;
+  align-self: start;
+}
+
+.button__prev {
+  grid-area: prev;
+}
+
+.button__next {
+  grid-area: next;
+}
+
+.search-pagination--count-wrapper {
+  grid-area: count;
+  font-size: 1.5em;
+  text-align: center;
+  border: 4px solid var(--crimson);
+  padding: 0em 1em;
+}

@@ -16,9 +16,9 @@ interface HeaderProps {
 const Header = ({ children }: HeaderProps) => (
   <div className="app-header">
     <div className="app-header--logo-wrapper">
-      <img 
-        className="app-header--logo" 
-        src={headerLogo} 
+      <img
+        className="app-header--logo"
+        src={headerLogo}
         alt="Harvard John A. Paulson School of Engineering and Applied Sciences"
       />
     </div>

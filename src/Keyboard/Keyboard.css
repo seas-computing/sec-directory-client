@@ -32,12 +32,12 @@
 .keyboard--search-input {
   background: #982b34;
   color: #fff;
-  border: none; 
+  border: none;
   padding: 1em;
   width: 100%;
   font-size: 2em;
   text-align: left;
-} 
+}
 
 .hg-theme-default.keyboard--component {
   background: #89272e;

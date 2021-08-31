@@ -19,12 +19,12 @@ export interface DirectoryEntry {
 * Displays the search results as an unordered list of names and locations
 */
 export const ResultsList = ({hits}: HitsProvided<DirectoryEntry>) => (
-  <div className="app-search-results">
-    <ul className="app-search-results--list">
+  <div className="search-results--wrapper">
+    <ul className="search-results--list">
       {hits.map(({objectID, name, location}) => (
-        <li key={objectID} className="app-search-results--list-item">
-          <h3 className="app-search-results--name">{name}</h3>
-          <p className="app-search-results--location">{location}</p>
+        <li key={objectID} className="search-results--list-item">
+          <h3 className="search-results--name">{name}</h3>
+          <p className="search-results--location">{location}</p>
         </li>
       ))}
     </ul>

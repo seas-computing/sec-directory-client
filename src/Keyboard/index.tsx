@@ -73,18 +73,13 @@ const OnScreenKeyboard = ({
   const [keyboardCase, setKeyboardCase] = useState<CASE>(CASE.DEFAULT);
 
   /**
-   * Handles the logic for controlling the non-input keys, i.e shift, caps, and
-   * enter.
-   * The capitalization is not built into the keyboard library unfortunately,
-   * and I think that leaving out the upper/lower case functionality might be
-   * more confusing for users.
+   * Handles the logic for controlling the shift and caps-lock keys. The
+   * capitalization is not built into the keyboard library unfortunately, and I
+   * think that leaving out the upper/lower case functionality might be more
+   * confusing for users.
    */
 
-  const otherKeyHandler = (button: string) => {
-    // Trigger a search on enter
-    if (button === '{enter}') {
-      triggerSearchHandler();
-    }
+  const capsHandler = (button: string) => {
     setKeyboardCase((currentCase) => {
       switch(currentCase) {
         case CASE.DEFAULT: {
@@ -128,6 +123,16 @@ const OnScreenKeyboard = ({
       }
     });
   };
+
+  /**
+   * Triggers the search when the enter key is pressed.
+   */
+  const enterHandler = (button: string) => {
+     // Trigger a search on enter
+     if (button === '{enter}') {
+       triggerSearchHandler();
+     }
+   }
 
   /**
    * Calculate the position closest to the touch coordinates without rendering
@@ -176,7 +181,8 @@ const OnScreenKeyboard = ({
           <div className="keyboard--keyboard-container">
             <Keyboard
               onChange={searchUpdateHandler}
-              onKeyPress={otherKeyHandler}
+              onKeyPress={capsHandler}
+              onKeyReleased={enterHandler}
               layoutName={
                 [CASE.LOCKED, CASE.SHIFTED].includes(keyboardCase)
                   ? 'shift'

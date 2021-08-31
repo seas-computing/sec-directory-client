@@ -18,3 +18,8 @@ export const ALGOLIA_APP_ID = process.env.REACT_APP_ALGOLIA_APP_ID || '';
  * The Algolia index against which we'll be searching
  */
 export const ALGOLIA_INDEX = process.env.REACT_APP_ALGOLIA_INDEX || '';
+
+/**
+ * The number of results we want to show per page
+ */
+export const ALGOLIA_HITS_PER_PAGE = 8;

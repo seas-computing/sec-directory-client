@@ -9,7 +9,7 @@ describe('Individual Search Results', function () {
       name: 'John Harvard',
       location: '150 Western Avenue',
       _highlightResult: {
-        name: { 
+        name: {
           value: 'Harvard',
           matchLevel: 'partial',
           matchedWords: ['Harvard']
@@ -21,7 +21,7 @@ describe('Individual Search Results', function () {
       name: 'Jane Harvard',
       location: '114 Western Avenue',
       _highlightResult: {
-        name: { 
+        name: {
           value: 'Harvard',
           matchLevel: 'partial',
           matchedWords: ['Harvard']

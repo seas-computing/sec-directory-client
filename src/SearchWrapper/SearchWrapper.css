@@ -1,0 +1,6 @@
+.search-wrapper {
+  display: grid;
+  gap: 0;
+  grid-template-rows: min-content min-content auto min-content;
+  height: 100%;
+}

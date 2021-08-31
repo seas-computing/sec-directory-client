@@ -11,7 +11,7 @@
   background-color: #a51c30;
   border-left: 1080px solid #ed1b35;
   border-right: 1080px solid #57c5d7;
-  box-shadow: 
+  box-shadow:
     -1080px -1em 0 0 #ed1b35,
     1080px 1em 0 0 #57c5d7;
   display: block;
@@ -20,7 +20,7 @@
   width: 250px;
 }
 
-.app-footer--copyright { 
+.app-footer--copyright {
   font-size: 0.8em;
   margin: 1em;
 }
