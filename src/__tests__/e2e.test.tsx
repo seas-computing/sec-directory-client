@@ -13,6 +13,7 @@ describe.only('End to End testing', function () {
   const timeout = 5000;
 
   beforeEach(function () {
+    jest.setTimeout(30000);
     // Initialize a connection to algolia and render the App
     const client = algoliasearch(
       ALGOLIA_APP_ID,
@@ -38,7 +39,7 @@ describe.only('End to End testing', function () {
       await act(async () => {
         userEvent.click(screen.getByText(/Touch/));
       });
-      await screen.findByRole('dialog');
+      await screen.findByRole('dialog', {}, { timeout });
 
       // click through the characters in the keyboard
       searchResult.name.split('').forEach((char) => {
@@ -118,7 +119,7 @@ describe.only('End to End testing', function () {
       act(() => {
         userEvent.click(screen.getByText(/Touch/));
       });
-      await screen.findByRole('dialog');
+      await screen.findByRole('dialog', {}, { timeout });
       // Send a blank search, returning everyone
       act(() => {
         userEvent.click(screen.getByText('search'));
@@ -154,7 +155,7 @@ describe.only('End to End testing', function () {
       });
 
       // Make sure the second page of results is accurate
-      await screen.findByText(secondPage[0].name);
+      await screen.findByText(secondPage[0].name, {}, { timeout });
       const nextResults = screen.queryAllByRole('listitem');
       expect(nextResults).toHaveLength(ALGOLIA_HITS_PER_PAGE);
       secondPage.forEach((hit, index) => {
@@ -170,7 +171,7 @@ describe.only('End to End testing', function () {
       });
 
       // Make sure we're still getting the same first page
-      await screen.findByText(firstPage[0].name)
+      await screen.findByText(firstPage[0].name, {}, { timeout });
       const prevResults = screen.queryAllByRole('listitem');
       expect(prevResults.map(({textContent}) => textContent))
         .toEqual(results.map(({textContent}) => textContent));
@@ -184,7 +185,7 @@ describe.only('End to End testing', function () {
       await act(async () => {
         userEvent.click(screen.getByText(/Touch/));
       });
-      await screen.findByRole('dialog');
+      await screen.findByRole('dialog', {}, { timeout });
       await act(async () => {
         fakeSearchString.split('').forEach((char) => {
           userEvent.click(screen.getByText(char));
