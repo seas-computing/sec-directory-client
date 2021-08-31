@@ -16,14 +16,6 @@ This is meant to be used in conjunction with the [sec-directory-server][server] 
 
 The backend of the application is the Algolia search index defined in the `REACT_APP_ALGOLIA_INDEX`/`REACT_APP_ALGOLIA_APP_ID` environment variable. You'll also need to provide an API key in `REACT_APP_ALGOLIA_API_KEY`, which should only have "search" permissions for the specified index. **This API key will be included verbatim in the client code, so you should never use an admin key, or any key with write permission.** Best practice is [to create a "Secured API Key"][api-key] scoped only to the index you want to use.
 
-### Development Index
-
-Ideally, each developer working on the project should create their own Algolia index (and corresponding API Key) to use while developing. You can use the same index for both client and server operations, though the server application does require an API key with write permission.
-
-### Test Index
-
-You can optionally create a file called `.env.test` if you want to specify separate indices for testing and development. This is recommended, as some of the end-to-end tests defined in `src/__tests__/e2e.test.tsx` expect the index to include data.
-
 ## Local Development
 
 `npm run start` will bring up a live development environment with hot-reloading. Once it's started, you can view the app in the browser at http://localhost:3000/.
@@ -32,11 +24,17 @@ As we're building for specific 55" touch screen displays ([Planar PS5561T][plana
 
 The only outbound data connections are to Algolia, so the server project does not need to be running at the same time.
 
-### Testing
+### Development Index
+
+Ideally, each developer working on the project should create their own Algolia index (and corresponding API Key) to use while developing. You can use the same index for both client and server operations, though the server application does require an API key with write permission.
+
+## Testing
 
 `npm run test` will run the Jest test suite. By default, Jest will run in watch mode and re-run tests whenever the code changes on disk. For more information on Jest and its features, see [the project homepage][jest].
 
-For testing our front-end code, we're relying on [React Testing Library][rtl] and favoring behavior-based testing.
+### Test Index
+
+You can optionally create a file called `.env.test` if you want to specify a separate index for testing. This is recommended, as some of the end-to-end tests defined in `src/__tests__/e2e.test.tsx` expect the index to include to include actual data, and keeping a separate test index can reduce phantom test failures.
 
 ## Production Build
 
