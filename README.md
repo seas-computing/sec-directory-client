@@ -2,7 +2,9 @@
 
 [![Test and Build](https://github.com/seas-computing/sec-directory-client/actions/workflows/test-build.yml/badge.svg)](https://github.com/seas-computing/sec-directory-client/actions/workflows/test-build.yml)
 
-This is the react-based client for the Directory Screen on the SEAS Allston Campus. It was bootstrapped with [Create React App][cra] using the default Typescript template.
+This is the react-based client application for the Directory Screen on the SEAS Allston Campus. It was bootstrapped with [Create React App][cra] using the default Typescript template.
+
+This is meant to be used in conjunction with the [sec-directory-server][server] project, which is responsible for populating the Algolia database.
 
 ## Setup
 
@@ -45,6 +47,7 @@ The official build of our code is handled by GitHub actions, and will be publish
 In production, the app will be server from an Amazon S3 bucket behind CloudFront.
 
 [cra]: https://create-react-app.dev/
+[server]: https://github.com/seas-computing/sec-directory-server
 [api-key]: https://www.algolia.com/doc/guides/security/api-keys/#secured-api-keys
 [planar]: https://www.planar.com/products/large-format-displays/ps4k/planar-ps5561t/
 [rdm]: https://developer.mozilla.org/en-US/docs/Tools/Responsive_Design_Mode
