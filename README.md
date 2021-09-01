@@ -22,7 +22,7 @@ The backend of the application is the Algolia search index defined in the `REACT
 
 `npm run start` will bring up a live development environment with hot-reloading. Once it's started, you can view the app in the browser at http://localhost:3000/.
 
-As we're building for specific 55" touch screen displays ([Planar PS5561T][planar]) in portrait mode, the design of the page is fixed to a 1080x1920 rectangle with scrolling disabled. To view the application on a standard screen, you can use the [Responsive Design Mode][rdm] built into most browsers to emulate a 1080x1920 viewport.
+As we're building for specific 55" touch screen displays ([Planar PS5561T][planar]) in portrait mode, the design of the page is fixed to a 1080x1920 rectangle with scrolling and pinch-to-zoom disabled. To view the application on a standard screen, you can use the [Responsive Design Mode][rdm] built into most browsers to emulate a 1080x1920 viewport.
 
 The only outbound data connections are to Algolia, so the server project does not need to be running at the same time.
 
