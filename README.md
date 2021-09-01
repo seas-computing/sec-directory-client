@@ -28,7 +28,7 @@ The only outbound data connections are to Algolia, so the server project does no
 
 ### Development Index
 
-Ideally, each developer working on the project should create their own Algolia index (and corresponding API Key) to use while developing. You can use the same index for both client and server operations, though the server application does require an API key with write permission.
+Ideally, each developer working on the project should create their own Algolia index (and corresponding API Key) to use while developing. You can use the same index for both client and server operations, though the server application does require an API key with write permission. As noted above, you should use a [Secured API Key][api-key] and not an admin key.
 
 ## Testing
 
