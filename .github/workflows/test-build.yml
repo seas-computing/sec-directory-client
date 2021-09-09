@@ -27,6 +27,7 @@ jobs:
     name: Build front end bundle 
     # Only build bundle when code has been merged into main
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    concurrency: bump_build_release
     needs: test
     runs-on: ubuntu-latest
     steps:
