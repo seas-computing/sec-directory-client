@@ -31,7 +31,10 @@ jobs:
     needs: test
     runs-on: ubuntu-latest
     steps:
+      # Always check out the main branch
       - uses: actions/checkout@v2
+        with:
+          ref: refs/heads/main
       - uses: actions/setup-node@v2
         with:
           node-version: 14
